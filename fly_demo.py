@@ -13,15 +13,13 @@ img = cv.imread('mapimage.jpeg')
 # each frame
 
 ims = []
-for i in range(200):
-    M = np.float32([[1, i, 25], [0, 1, 500]])
+for i in range(350):
     shifted = imutils.translate(img, 0, i)
     im = plt.imshow(shifted, animated=True)
     ims.append([im])
 
-ani = animation.ArtistAnimation(fig, ims, interval=90, blit=True,
-                                repeat_delay=1000)
+ani = animation.ArtistAnimation(fig, ims, interval=100, blit=True)
 
-# ani.save('fly_over.mp4')
+ani.save('fly_over.mp4',fps=10)
 
-plt.show()
+# plt.show()
