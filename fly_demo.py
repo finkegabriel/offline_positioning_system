@@ -15,20 +15,19 @@ img = cv.imread('mapimage.jpeg')
 # each frame
 
 ims = []
-for i in range(200):
-    '''
-    COUNTER = 0
-    while counter <=2000
-        shifted = imutils.translate(img, 0, COUNTER*2.5)
-        im = plt.imshow(shifted, animated=True)
-        ims.append([im])
-        counter+=1
-    if counter >=2000
-    break
-    '''
-    shifted = imutils.translate(img, 0, i*2.5)
+
+COUNTER=0
+while COUNTER<1000:
+    shifted = imutils.translate(img, 0, COUNTER*2.5)
     im = plt.imshow(shifted, animated=True)
     ims.append([im])
+    COUNTER+=1
+    if COUNTER == 1000:
+        break
+
+    # shifted = imutils.translate(img, 0, i*2.5)
+    # im = plt.imshow(shifted, animated=True)
+    # ims.append([im])
 
 fig_two.set_xlim(1000, 2000)
 fig_two.set_ylim(2000,500)
