@@ -16,6 +16,16 @@ img = cv.imread('mapimage.jpeg')
 
 ims = []
 for i in range(200):
+    '''
+    COUNTER = 0
+    while counter <=2000
+        shifted = imutils.translate(img, 0, COUNTER*2.5)
+        im = plt.imshow(shifted, animated=True)
+        ims.append([im])
+        counter+=1
+    if counter >=2000
+    break
+    '''
     shifted = imutils.translate(img, 0, i*2.5)
     im = plt.imshow(shifted, animated=True)
     ims.append([im])
