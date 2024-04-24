@@ -7,7 +7,7 @@ import imutils
 fig = plt.figure()
 fig_two = plt.axes()
 plt.axis('off')
-img = cv.imread('mn_2.jpeg')
+img = cv.imread('tonto.png')
 
 # ims is a list of lists, each row is a list of artists to draw in the
 # current frame; here we are just animating one artist, the image, in
@@ -25,10 +25,10 @@ while COUNTER<700:
     if COUNTER == 1000:
         break
 
-fig_two.set_xlim(1000, 2000)
-fig_two.set_ylim(2000,500)
+fig_two.set_xlim(0, 400)
+fig_two.set_ylim(600,20)
 
-ani = animation.ArtistAnimation(fig, ims, interval=100, blit=True)
+ani = animation.ArtistAnimation(fig, ims, interval=50, blit=True)
 
 # plt.show()
-ani.save('fly_over_mn.mp4',fps=10)
+ani.save('fly_over_tonto.mp4',fps=10)
