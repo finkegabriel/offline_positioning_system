@@ -10,7 +10,7 @@ import numpy as np
 fig = plt.figure()
 fig_two = plt.axes()
 plt.axis('off')
-img = Image.open('example.png')
+img = Image.open('tonto.png')
 
 img_array = np.array(img)
 height, width = img_array.shape[:2]
@@ -86,22 +86,28 @@ def translate_image(image, x_shift, y_shift):
     return shifted
 
 def update(frame):
-    shifted = translate_image(img, 0, -frame)
-    shifted_pil = Image.fromarray(shifted)
-    rotated = shifted_pil.rotate(heading.get_angle())
-    rotated_array = np.array(rotated)
+    # Calculate center offset based on rotation
+    angle_rad = np.radians(heading.get_angle())
+    y_offset = abs(np.sin(angle_rad) * width/4)  # Adjust centering amount
     
-    im.set_array(rotated_array)
+    # First rotate the image
+    img_pil = Image.fromarray(img_array)
+    rotated = img_pil.rotate(heading.get_angle(), expand=False, center=(width/2, height/2))
+    
+    # Then translate the rotated image
+    shifted = translate_image(rotated, 0, -(frame - y_offset))
+    
+    im.set_array(shifted)
     return [im]
 
 heading_indi(heading.get_angle())
 # Add key binding before animation creation
 fig.canvas.mpl_connect('key_press_event', on_key)
-ani = animation.FuncAnimation(fig, update, frames=range(0, height, 5),
+ani = animation.FuncAnimation(fig, update, frames=range(0, height, 2),
                             interval=50, blit=False)
 
-fig_two.set_xlim(10, width/2)
-fig_two.set_ylim(0,height/3)
+fig_two.set_xlim(0, width/2)
+fig_two.set_ylim(0,height/2)
 
 plt.show()
 # ani.save('fly_over_tonto.mp4',fps=10)
